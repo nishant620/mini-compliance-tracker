@@ -178,9 +178,13 @@ function App() {
           {filteredTasks.length === 0 && <p>No tasks found</p>}
 
           {filteredTasks.map((task) => {
-            const isOverdue =
-              task.status === "Pending" && new Date(task.due_date) < new Date();
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
 
+            const taskDate = new Date(task.due_date);
+            taskDate.setHours(0, 0, 0, 0);
+
+            const isOverdue = task.status === "Pending" && taskDate < today;
             return (
               <div
                 key={task._id}
@@ -192,6 +196,11 @@ function App() {
                 }}
               >
                 <strong>{task.title}</strong>
+
+                {isOverdue && (
+                  <p style={{ color: "red", fontWeight: "bold" }}>⚠ Overdue</p>
+                )}
+
                 <p>Status: {task.status}</p>
                 <p>Category: {task.category}</p>
                 <p>Priority: {task.priority}</p>
