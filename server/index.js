@@ -15,10 +15,7 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected ✅"))
   .catch(err => console.log(err));
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("API is working");
-});
+
 app.get("/clients", async (req, res) => {
   try {
     const clients = await Client.find();
@@ -71,6 +68,8 @@ app.patch("/tasks/:id", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
