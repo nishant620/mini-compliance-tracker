@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API = "http://localhost:5000";
+const API = "https://mini-compliance-tracker-backend.onrender.com";
+
 
 function App() {
   const [clients, setClients] = useState([]);
